@@ -18,7 +18,14 @@ app.get('/', async (req, res) => {
     res.json({ msg: "Welcome to Smartsuite Home" })
 })
 
-//app.use('/users', require('./routes/users.routes.js'))
+app.use('/api/organisations', require('./routes/organisations.routes.js'));
+app.use(require('./routes/users.routes.js'))
+// app.use('/auth', require('./routes/users.routes.js'))
+// app.use('/api', require('./routes/users.routes.js'))
+// app.use('/api/users', require('./routes/users.routes.js'))
+
+
+
 
 app.all('*', async (req, res) => {
     res.status(status.NOT_FOUND).send(`Can't find ${req.originalUrl} on the server!!!`)
