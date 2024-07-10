@@ -60,7 +60,7 @@ exports.createUser = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(400).json({ status: 'Bad request', message: 'Registration unsuccessful', statusCode: 400, error: error.message });
+    res.status(400).json({ status: 'Bad request', message: 'Registration unsuccessful', statusCode: 400 });
   }
 }
 
