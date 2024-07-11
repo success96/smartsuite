@@ -17,8 +17,22 @@ exports.createUser = async (req, res) => {
 
   const validationErrors = validateUser(req.body);
   if (validationErrors.length > 0) {
-    return res.status(400).json({ errors: validationErrors });
+    return res.status(422).json({ errors: validationErrors });
   }
+
+  let existingMail = await prisma.user.findUnique({where: {email}});
+  
+  if(existingMail){
+    return res.status(422).json({
+      message: "Email already exists",
+      errors: [
+          {
+              field: "email",
+              message: "Email must be unique"
+          }
+      ]
+  })
+  };
 
   try {
     const hashedPassword = utility.hashPassword(password);
@@ -60,7 +74,7 @@ exports.createUser = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(400).json({ status: 'Bad request', message: 'Registration unsuccessful', statusCode: 400 });
+    res.status(422).json({ status: 'Bad request', message: 'Registration unsuccessful', statusCode: 400 });
   }
 }
 
