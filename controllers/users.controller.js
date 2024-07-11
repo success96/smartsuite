@@ -17,7 +17,7 @@ exports.createUser = async (req, res) => {
 
   const validationErrors = validateUser(req.body);
   if (validationErrors.length > 0) {
-    return res.status(422).json({ errors: validationErrors });
+    return res.status(400).json({ errors: validationErrors });
   }
 
   try {
