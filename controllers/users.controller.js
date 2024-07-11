@@ -21,7 +21,7 @@ exports.createUser = async (req, res) => {
   }
 
   let existingMail = await prisma.user.findUnique({where: {email}});
-  
+
   if(existingMail){
     return res.status(422).json({
       message: "Email already exists",
@@ -112,12 +112,18 @@ exports.userLogin = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(400).json(
-        { 
-            status: 'Bad request', 
-            message: 'Authentication failed', 
-            statusCode: 400
-        }
+    res.status(422).json(
+      {
+        status: "Bad Request",
+        errors: [
+            {
+                "field": "password",
+                "message": "password must be a string, password should not be empty"
+            }
+        ],
+        message: "password: password must be a string, password should not be empty",
+        statusCode: 422
+    }
     );
   }
 }
