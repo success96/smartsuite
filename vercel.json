@@ -2,8 +2,8 @@
 { 
     "version": 2,
     "builds": [{"src": "server.js", "use":"@vercel/node"}],
-    "routes": [{"src": "./(.*)", "dest": "/server.js"}], 
-    "rewrites": [{ "source": "/(.*)", "dest": "/server.js" }], 
+    "routes": [{"src": "./(.*)", "dest": "/"}], 
+    "rewrites": [{ "source": "/(.*)", "destination": "/server.js" }], 
     "buildCommand": "prisma generate --schema=./database/prisma/schema.prisma && npm run start",
     "installCommand": "npm install"
 }
