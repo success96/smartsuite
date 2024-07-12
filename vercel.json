@@ -6,4 +6,5 @@
     "rewrites": [{ "source": "/(.*)", "destination": "/server.js" }], 
     "buildCommand": "prisma generate --schema=./database/prisma/schema.prisma && npm run start",
     "installCommand": "npm install"
+    
 }
